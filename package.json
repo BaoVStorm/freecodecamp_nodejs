@@ -2,6 +2,7 @@
 	"author": "VStorm",
 	"description": "A project that does something awesome",
 	"keywords": ["VStorm", "freecodecamp", "nodeJS"],
+	"license": "VS.1.0",
 	"name": "fcc-learn-npm-package-json",
 	"dependencies": {
 		"express": "^4.14.0"
