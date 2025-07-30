@@ -4,10 +4,14 @@ const dotenv = require('dotenv');
 dotenv.config();
 const app = express();
 
-console.log("Hello World");
-
 //
 app.use('/public', express.static(__dirname + '/public'));
+
+// middleware
+app.use((req, res, next) => {
+    console.log(`${req.method} ${req.path} - ${req.ip}`);
+    next(); // không có sẽ request mãi, trình duyệt ko load
+});
 
 app.get('/', (req, res) =>{
     res.sendFile(__dirname + "/views/index.html");
