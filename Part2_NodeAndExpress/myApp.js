@@ -1,8 +1,13 @@
 const express = require('express');
 const dotenv = require('dotenv');
+const bodyParser = require('body-parser');
 
 dotenv.config();
 const app = express();
+
+// middleware | Use body-parser to Parse POST Requests
+// dùng để cho phép dùng req.body
+app.use(bodyParser.urlencoded({extended: false}))
 
 // middleware
 app.use('/public', express.static(__dirname + '/public'));
@@ -45,6 +50,14 @@ app.get('/:word/echo', (req, res) => {
     })
 })
 
+// Get Query Parameter Input from the Client
+app.get('/name', (req, res) => {
+    const { first, last } = req.query;
+    
+    res.json({
+        name: `${first} ${last}`
+    });
+})
 
 
 
