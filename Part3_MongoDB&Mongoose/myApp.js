@@ -29,7 +29,7 @@ const createAndSavePerson = (done) => {
     age: 50, 
     favoriteFoods: ["abc", "xyz"]
   });
-  
+
   person.save((err, data) => {
     if(err) 
       console.log(err);
@@ -38,12 +38,31 @@ const createAndSavePerson = (done) => {
   })
 };
 
+
+// create many íntances
 const createManyPeople = (arrayOfPeople, done) => {
-  done(null /*, data*/);
+  // var arrayOfPeople = [
+  //   {name: "Frankie", age: 74, favoriteFoods: ["Del Taco"]},
+  //   {name: "Sol", age: 76, favoriteFoods: ["roast chicken"]},
+  //   {name: "Robert", age: 78, favoriteFoods: ["wine"]}
+  // ]
+
+  const data = Person.create(arrayOfPeople, function (err, people) {
+    if (err) return console.log(err);
+    done(null, people);
+  });
 };
 
+// 
 const findPeopleByName = (personName, done) => {
-  done(null /*, data*/);
+  // personName = "VStorm"
+
+  Person.find({name: personName}, (error, data) => {
+    if(error)
+      console.log(error)
+
+    done(null, data);
+  })
 };
 
 const findOneByFood = (food, done) => {
