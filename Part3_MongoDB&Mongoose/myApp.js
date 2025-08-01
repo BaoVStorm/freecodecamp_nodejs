@@ -88,10 +88,20 @@ const findPersonById = (personId, done) => {
   })
 };
 
+// find instance and update
 const findEditThenSave = (personId, done) => {
   const foodToAdd = "hamburger";
 
-  done(null /*, data*/);
+  Person.findById(personId, (error, person) => {
+    if(error) console.log(error)
+
+    person.favoriteFoods.push(foodToAdd);
+    
+    person.save((error, data) => {
+      if(error) console.log(error)
+      done(null, data);
+    })
+  });
 };
 
 const findAndUpdate = (personName, done) => {
