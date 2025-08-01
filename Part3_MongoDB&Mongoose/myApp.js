@@ -53,7 +53,7 @@ const createManyPeople = (arrayOfPeople, done) => {
   });
 };
 
-// 
+// find instances
 const findPeopleByName = (personName, done) => {
   // personName = "VStorm"
 
@@ -66,7 +66,16 @@ const findPeopleByName = (personName, done) => {
 };
 
 const findOneByFood = (food, done) => {
-  done(null /*, data*/);
+  // food = "apple"
+
+  Person.findOne({favoriteFoods: food}, (error, data) => {
+    if(error)
+      console.log(error);
+    done(null, data);
+  })
+
+  // nếu muốn tìm nhiều phần tử trong mảng
+  // favoriteFoods: { $all: ["bún bò", "bánh mì"] }
 };
 
 const findPersonById = (personId, done) => {
