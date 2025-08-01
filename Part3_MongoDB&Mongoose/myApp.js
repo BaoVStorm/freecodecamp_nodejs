@@ -79,7 +79,13 @@ const findOneByFood = (food, done) => {
 };
 
 const findPersonById = (personId, done) => {
-  done(null /*, data*/);
+  // _id = của hệ thống
+
+  Person.findById(personId, (error, data) => {
+    if(error)
+      console.log(error);
+    done(null, data);
+  })
 };
 
 const findEditThenSave = (personId, done) => {
