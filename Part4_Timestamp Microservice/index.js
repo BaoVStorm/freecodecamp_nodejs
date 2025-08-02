@@ -18,10 +18,38 @@ app.get("/", function (req, res) {
   res.sendFile(__dirname + '/views/index.html');
 });
 
-
 // your first API endpoint... 
 app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
+});
+
+app.get("/api/:date", (req, res)=>{
+  const {date} = req.params;
+
+  let formatDate = new Date(date);
+  
+  if (isNaN(formatDate.getTime())) {
+    // Có thể là timestamp dạng số
+    formatDate = new Date(Number(date));
+  }
+
+  if (isNaN(formatDate.getTime())) {
+    return res.json({ error: "Invalid Date" });
+  }
+
+  res.json({
+    unix: formatDate.getTime(),
+    utc: formatDate.toUTCString()
+  })
+});
+
+app.get("/api", (req, res) => {
+  const now = new Date();
+
+  res.json({
+    unix: now.getTime(),
+    utc: now.toUTCString()
+  });
 });
 
 
